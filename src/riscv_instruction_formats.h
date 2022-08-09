@@ -6,21 +6,8 @@
 
 #include "types.h"
 #include "bitops.h"
-#include "bits.h"
 
-// pack a bunch of named bit refs into an actual bits storage
-
-// man... my bit library is actually going to help - probably
-// next in line is some sort of 'bit reference' which is probably not as sexy as it
-// sounds but should be cool
 struct riscv_r_type {
-    // the parent is a 'bits'
-    // the bit_slices inside need to reference that parent (somehow - this maybe *very* hard)
-    // then you can take bits and pieces and each slice can
-    // expose a read/write interface - possibly even the functions of bit (shift etc)
-    // what i'm saying is... it looks like bits<B> but, in reality, the storage
-    // is the parent class in which it exists (this may even allow compile time
-    // insanity to prevale)
     riscv_r_type(u32 instruction) {
         funct7 = extract(instruction, 25, 7);
         rs2 = extract(instruction, 20, 5);

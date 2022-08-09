@@ -157,16 +157,29 @@ struct riscv_exec
 
     virtual void reset();
 
-    virtual void ebreak() {}
-    virtual void ecall() {}
+//    virtual void ebreak() {}
+//    virtual void ecall() {}
 
     void execute();
 
     void illegal();
 
     void (*illegal_cb)(riscv_exec *) = nullptr;
+    void (*ebreak)(riscv_exec *) = nullptr;
+    void (*ecall)(riscv_exec *) = nullptr;
 
     std::string dump();
+
+    // note that U64 systems *exist*
+    // longest opcode is fence.i = 7 chars
+    // todo
+//    void disassembly(u32 addr, u8 op, u8 reg, u32 imm);
+//    void disassembly(u32 addr, u8 reg, u32 imm);
+//    void disassembly(u32 addr, u8 op, u8 rd, u8 rs1, u32 imm);
+    // tbh not sure this is possible
+    // there are 2 reg + imm, 3 reg (rd,rs1,rs2) and rx, rx(imm)
+    // that's kinda it... *if* i want an assembler then breaking this out could be very useful
+//    void disassembly(u32 addr, u8 op, u8 rd, u8 rs1, u32 rimm, u32 imm);
 
     // move reg rd/wr out of here
 
